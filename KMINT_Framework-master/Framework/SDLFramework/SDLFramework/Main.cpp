@@ -10,7 +10,7 @@
 #include "Globals.h"
 
 #include "Graph.h"
-
+#include "Background.h"
 
 using namespace std;
 
@@ -25,7 +25,8 @@ int main(int args[])
 	}
 
 	application->SetTargetFPS(60);
-	application->SetColor(Color(255, 10, 40, 255));
+	Background* background = new Background();
+	application->AddRenderable(background);
 
 	std::vector<Bird*>* birds = new vector<Bird*>;
 	int lastId = 0;
@@ -282,7 +283,7 @@ int main(int args[])
 				}
 				break;
 			case SDL_MOUSEBUTTONDOWN:
-				if (event.button.button == 1) {
+				/*if (event.button.button == 1) {
 					int mouseX = 0;
 					int mouseY = 0;
 					SDL_GetMouseState(&mouseX, &mouseY);
@@ -291,7 +292,7 @@ int main(int args[])
 					birds->push_back(bird);
 					application->AddRenderable(bird);
 					lastId++;
-				}
+				}*/
 				break;
 			}
 		}

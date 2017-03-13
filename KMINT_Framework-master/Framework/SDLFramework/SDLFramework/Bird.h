@@ -23,8 +23,7 @@ public:
 	int id;
 	std::vector<Bird*>* birds;
 private:
-	int screenWidth = 800;
-	int screenHeigth = 600;
+
 	SDL_Texture *texture;
 	std::vector<Bird*> getNearbyBirds(double range);
 	int generateRandom(int min, int max);
