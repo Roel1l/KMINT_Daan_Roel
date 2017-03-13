@@ -18,5 +18,8 @@ const bool STEER_INTENSITY = 0.1;
 
 //
 const bool RANDOM_SPAWN = true;
-const double SPEED = 3;
+const double SPEED = 1;
 const int AMOUNT_OF_BIRDS = 30;
+
+const int SCREEN_WIDTH = 1200;
+const int SCREEN_HEIGTH = 600;
