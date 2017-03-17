@@ -88,9 +88,12 @@
     <ClCompile Include="Bird.cpp" />
     <ClCompile Include="Edge.cpp" />
     <ClCompile Include="FWApplication.cpp" />
+    <ClCompile Include="Ghost.cpp" />
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ExampleGameObject.cpp" />
+    <ClCompile Include="Pacman.cpp" />
+    <ClCompile Include="Powerpill.cpp" />
     <ClCompile Include="Vector.cpp" />
     <ClCompile Include="Vertex.cpp" />
   </ItemGroup>
@@ -104,9 +107,12 @@
     <ClInclude Include="Edge.h" />
     <ClInclude Include="FWApplication.h" />
     <ClInclude Include="ExampleGameObject.h" />
+    <ClInclude Include="Ghost.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="IGameObject.h" />
+    <ClInclude Include="Pacman.h" />
+    <ClInclude Include="Powerpill.h" />
     <ClInclude Include="Vector.h" />
     <ClInclude Include="Vertex.h" />
   </ItemGroup>

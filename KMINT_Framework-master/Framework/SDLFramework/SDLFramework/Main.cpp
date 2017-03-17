@@ -8,7 +8,6 @@
 #include "Bird.h"
 #include "ExampleGameObject.h"
 #include "Globals.h"
-
 #include "Graph.h"
 #include "Background.h"
 
@@ -38,6 +37,8 @@ int main(int args[])
 		lastId++;
 	}
 
+	// maak de graph + 4 pillen + 4 ghosts en 1 pacman
+#pragma region graph init
 	//auto graph = Graph();
 	auto graph = Graph(application);
 	auto vertex104 = new Vertex(34, 120);
@@ -156,24 +157,39 @@ int main(int args[])
 	graph.addVertex(vertex163);
 	auto vertex224 = new Vertex(261, 456);
 	graph.addVertex(vertex224);
-	auto vertex243 = new Vertex(34, 82); // Powerpill
+
+	// spawn 4 pillen
+	auto vertex243 = new Vertex(34, 82);
 	graph.addVertex(vertex243);
-	auto vertex244 = new Vertex(541, 80); // Powerpill
+	graph.addPill(new Powerpill(vertex243->x, vertex243->y));
+	auto vertex244 = new Vertex(541, 80);
 	graph.addVertex(vertex244);
-	auto vertex245 = new Vertex(544, 456); // Powerpill
+	graph.addPill(new Powerpill(vertex244->x, vertex244->y));
+	auto vertex245 = new Vertex(544, 456);
 	graph.addVertex(vertex245);
-	auto vertex246 = new Vertex(34, 456); // Powerpill
+	graph.addPill(new Powerpill(vertex245->x, vertex245->y));
+	auto vertex246 = new Vertex(34, 456);
 	graph.addVertex(vertex246);
-	auto vertex103 = new Vertex(34, 48); // Spawn spookje
+	graph.addPill(new Powerpill(vertex246->x, vertex246->y));
+
+	// spawn 1e 4 spookjes
+	auto vertex103 = new Vertex(34, 48);
 	graph.addVertex(vertex103);
-	auto vertex114 = new Vertex(541, 45); // Spawn spookje
+	graph.addGhost(new Ghost(vertex103->x, vertex103->y));
+	auto vertex114 = new Vertex(541, 45);
 	graph.addVertex(vertex114);
-	auto vertex157 = new Vertex(37, 562); // Spawn spookje
+	graph.addGhost(new Ghost(vertex114->x, vertex114->y));
+	auto vertex157 = new Vertex(37, 562);
 	graph.addVertex(vertex157);
-	auto vertex162 = new Vertex(541, 568); // Spawn spookje
+	graph.addGhost(new Ghost(vertex157->x, vertex157->y));
+	auto vertex162 = new Vertex(541, 568);
 	graph.addVertex(vertex162);
-	auto vertex250 = new Vertex(290, 345); // Spawn pacman
+	graph.addGhost(new Ghost(vertex162->x, vertex162->y));
+
+	// Spawn pacman
+	auto vertex250 = new Vertex(290, 345);
 	graph.addVertex(vertex250);
+
 	graph.addEdge(new Edge(vertex103, vertex106));
 	graph.addEdge(new Edge(vertex106, vertex107));
 	graph.addEdge(new Edge(vertex107, vertex108));
@@ -260,13 +276,16 @@ int main(int args[])
 	graph.addEdge(new Edge(vertex246, vertex149));
 	graph.addEdge(new Edge(vertex136, vertex245));
 	graph.addEdge(new Edge(vertex245, vertex137));
+#pragma endregion
 
-	graph.drawGraph();
+	for each (auto g in graph.getGhosts())
+	{
+		application->AddRenderable(g);
+	}
 
 	while (application->IsRunning())
 	{
 		application->StartTick();
-
 		SDL_Event event;
 		while (SDL_PollEvent(&event))
 		{
@@ -296,22 +315,6 @@ int main(int args[])
 				break;
 			}
 		}
-
-
-		//// Text drawing
-		//application->SetColor(Color(0, 0, 0, 255));
-		//application->DrawText("Welcome to KMint", 400, 300);
-		//
-		//// Graph drawing
-		//application->SetColor(Color(0, 0, 0, 255));
-		//application->DrawLine(400, 350, 350, 400);
-		//application->DrawLine(350, 400, 450, 400);
-		//application->DrawLine(450, 400, 400, 350);
-
-		//application->SetColor(Color(0, 0, 255, 255));
-		//application->DrawCircle(400, 350, 10, true);
-		//application->DrawCircle(350, 400, 10, true);
-		//application->DrawCircle(450, 400, 10, true);
 
 		//// For the background
 		application->SetColor(Color(255, 255, 255, 255));
