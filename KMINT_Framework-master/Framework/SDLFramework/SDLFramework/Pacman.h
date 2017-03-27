@@ -1,7 +1,9 @@
 #pragma once
 #include "Vertex.h"
+#include "IGameObject.h"
+#include <SDL_render.h>
 
-class Pacman
+class Pacman : public IGameObject
 {
 public:
 	Pacman();
@@ -11,7 +13,13 @@ public:
 	double xPos;
 	double yPos;
 
+	double speed;
+
 	Vertex * targetVertex;
 	Vertex * nextVertex;
+
+	void Update(float deltaTime);
+private:
+	SDL_Texture *pacmanTexture;
 };
 

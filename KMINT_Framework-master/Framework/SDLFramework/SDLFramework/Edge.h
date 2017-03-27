@@ -12,5 +12,7 @@ public:
 	double bX;
 	double aY;
 	double bY;
+
+	double pixelDistance;
 };
 

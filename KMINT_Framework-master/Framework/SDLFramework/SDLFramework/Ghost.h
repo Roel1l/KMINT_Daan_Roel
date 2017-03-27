@@ -2,22 +2,29 @@
 #include "Vertex.h"
 #include "IGameObject.h"
 #include <SDL_render.h>
+#include <random>
+#include "State.h"
 
 class Ghost : public IGameObject
 {
 public:
 	Ghost();
-	Ghost(double x, double y);
+	Ghost(double xPos, double yPos);
 	~Ghost();
 
-	double xPos;
-	double yPos;
-
-	SDL_Texture *ghostTexture;
+	double x;
+	double y;
 
 	Vertex * targetVertex;
 	Vertex * nextVertex;
 
+	void increaseSpeed();
 	void Update(float deltaTime);
+private:
+	SDL_Texture *ghostTexture;
+	int wanderingTime;
+	double speed;
+	double speedModifier;
+	State *ghostState;
 };
 

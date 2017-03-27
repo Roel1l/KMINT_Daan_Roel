@@ -23,3 +23,10 @@ const int AMOUNT_OF_BIRDS = 30;
 
 const int SCREEN_WIDTH = 1200;
 const int SCREEN_HEIGTH = 600;
+
+// ghost en pacman specifieke globals
+const double PACMAN_BASE_SPEED = 3;
+
+double WANDER_CHANCE = 33.3;
+double PILL_CHANCE = 33.3;
+double CHASE_CHANCE = 33.3;

@@ -4,14 +4,14 @@ Powerpill::Powerpill()
 {
 }
 
-Powerpill::Powerpill(double x, double y)
+Powerpill::Powerpill(double xPos, double yPos)
 {
 	pillTexture = mApplication->LoadTexture("pill.png");
 	this->SetTexture(pillTexture);
 	this->SetSize(35, 35);
 
-	xPos = x;
-	yPos = y;
+	x = xPos;
+	y = yPos;
 }
 
 Powerpill::~Powerpill()
@@ -21,4 +21,5 @@ Powerpill::~Powerpill()
 
 void Powerpill::Update(float deltaTime)
 {
+	SetOffset(x, y, 0);
 }

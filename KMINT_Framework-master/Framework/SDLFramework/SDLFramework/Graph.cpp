@@ -11,7 +11,7 @@ Graph::Graph(FWApplication * fwapplication)
 
 Graph::~Graph()
 {
-	
+	delete pacman;
 }
 
 void Graph::addVertex(Vertex * v)
@@ -32,6 +32,11 @@ void Graph::addPill(Powerpill * p)
 void Graph::addGhost(Ghost * g)
 {
 	ghosts.push_back(g);
+}
+
+void Graph::addPacman(Pacman * p)
+{
+	pacman = p;
 }
 
 void Graph::drawGraph()
@@ -56,4 +61,9 @@ std::vector<Ghost*> Graph::getGhosts()
 std::vector<Powerpill*> Graph::getPills()
 {
 	return pills;
+}
+
+Pacman * Graph::getPacman()
+{
+	return pacman;
 }
