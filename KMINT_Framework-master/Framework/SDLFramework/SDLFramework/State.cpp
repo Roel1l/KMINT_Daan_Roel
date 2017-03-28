@@ -9,21 +9,6 @@ State::~State()
 {
 }
 
-void State::doStuff()
-{
-	switch (currentState)
-	{
-	case wandering:
-		break;
-	case grabPill:
-		break;
-	case chasePacman:
-		break;
-	default:
-		break;
-	}
-}
-
 void State::updateState(double wander, double pill, double chase)
 {
 	double low = 0;
@@ -34,13 +19,13 @@ void State::updateState(double wander, double pill, double chase)
 	double randomNumber = unif(re);
 
 	if (randomNumber <= wander) {
-		currentState = wandering;
+		currentState = "wandering";
 	}
 	else if (randomNumber > wander && randomNumber <= wander + pill) {
-		currentState = grabPill;
+		currentState = "grabPill";
 	}
 	else if (randomNumber > wander + pill) {
-		currentState = chasePacman;
+		currentState = "chasePacman";
 	}
 }
 

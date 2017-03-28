@@ -7,16 +7,9 @@ public:
 	State();
 	~State();
 
-	enum state {
-		wandering,
-		grabPill,
-		chasePacman
-	};
-
-	void doStuff();
+	std::string currentState;
 
 	void updateState(double wander, double pill, double chase);
 private:
-	state currentState;
 };
 

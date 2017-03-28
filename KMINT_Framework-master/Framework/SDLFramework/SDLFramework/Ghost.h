@@ -9,22 +9,33 @@ class Ghost : public IGameObject
 {
 public:
 	Ghost();
-	Ghost(double xPos, double yPos);
+	Ghost(Vertex * v, double wanderChance, double searchPillChance, double chaseChance);
 	~Ghost();
 
 	double x;
 	double y;
 
 	Vertex * targetVertex;
-	Vertex * nextVertex;
+	Vertex * currentVertex;
+
+	void move();
 
 	void increaseSpeed();
 	void Update(float deltaTime);
+
+	State *ghostState;
 private:
-	SDL_Texture *ghostTexture;
+	// chances
+	double wandering;
+	double searchPill;
+	double chase;
+
+	SDL_Texture *ghostTextureIdle;
+	SDL_Texture *ghostTexturePill;
+	SDL_Texture *ghostTextureChase;
+
 	int wanderingTime;
 	double speed;
 	double speedModifier;
-	State *ghostState;
 };
 

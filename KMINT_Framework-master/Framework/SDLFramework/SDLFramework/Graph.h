@@ -20,10 +20,13 @@ public:
 	void addGhost(Ghost * g);
 	void addPacman(Pacman * p);
 	void drawGraph();
+	bool run();
 
 	// return functies
 	std::vector<Ghost *> getGhosts();
 	std::vector<Powerpill *> getPills();
+	std::vector<Vertex *> getNeighbours(Vertex * vertex);
+	Vertex * pickRandomNeighbour(std::vector<Vertex *> neighbours);
 	Pacman * getPacman();
 private:
 	std::vector<Vertex *> vertexes;
@@ -34,5 +37,7 @@ private:
 	Pacman * pacman;
 
 	FWApplication * app;
+
+	Vertex * aStarSearch(Vertex * start, Vertex * goal);
 };
 

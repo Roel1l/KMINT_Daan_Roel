@@ -7,6 +7,8 @@ Edge::Edge()
 
 Edge::Edge(Vertex * a, Vertex * b)
 {
+	vertexA = a;
+	vertexB = b;
 	aX = a->x;
 	aY = a->y;
 	bX = b->x;
@@ -16,4 +18,6 @@ Edge::Edge(Vertex * a, Vertex * b)
 
 Edge::~Edge()
 {
+	delete vertexA;
+	delete vertexB;
 }
