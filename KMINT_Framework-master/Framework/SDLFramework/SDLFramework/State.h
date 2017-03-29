@@ -9,7 +9,7 @@ public:
 
 	std::string currentState;
 
-	void updateState(double wander, double pill, double chase);
+	std::string updateState(double wander, double pill, double chase);
 private:
 };
 

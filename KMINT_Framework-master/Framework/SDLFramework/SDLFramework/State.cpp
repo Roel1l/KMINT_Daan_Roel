@@ -9,23 +9,25 @@ State::~State()
 {
 }
 
-void State::updateState(double wander, double pill, double chase)
+std::string State::updateState(double wander, double pill, double chase)
 {
 	double low = 0;
 	double up = 100;
 
-	std::uniform_real_distribution<double> unif(low, up);
-	std::default_random_engine re;
-	double randomNumber = unif(re);
+	std::random_device rd;
+	std::mt19937 rng(rd());
 
+	std::uniform_real_distribution<double> unif(low, up);
+	double randomNumber = unif(rng);
+	 
 	if (randomNumber <= wander) {
-		currentState = "wandering";
+		return "wandering";
 	}
 	else if (randomNumber > wander && randomNumber <= wander + pill) {
-		currentState = "grabPill";
+		return "grabPill";
 	}
 	else if (randomNumber > wander + pill) {
-		currentState = "chasePacman";
+		return "chasePacman";
 	}
 }
 

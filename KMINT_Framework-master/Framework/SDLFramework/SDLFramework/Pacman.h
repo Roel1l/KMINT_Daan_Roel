@@ -16,7 +16,7 @@ public:
 	double speed;
 
 	Vertex * targetVertex;
-	Vertex * nextVertex;
+	Vertex * currentVertex;
 
 	void Update(float deltaTime);
 private:

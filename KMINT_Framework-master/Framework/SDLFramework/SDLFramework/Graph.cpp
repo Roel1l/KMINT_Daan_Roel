@@ -65,15 +65,21 @@ bool Graph::run()
 
 	for each (auto ghost in ghosts)
 	{
-		if (ghost->ghostState->currentState == "wandering") {
-			if (ghost->targetVertex == NULL) {
+		// only find a new target when there is no current target
+		if (ghost->targetVertex == NULL) {
+			if (ghost->ghostState->currentState == "wandering") {
 				ghost->targetVertex = pickRandomNeighbour(getNeighbours(ghost->currentVertex));
+			}
+			else if (ghost->ghostState->currentState == "searchPill") {
+				ghost->targetVertex = aStarClosestPill(ghost->currentVertex);
+			}
+			else if (ghost->ghostState->currentState == "chasePacman") {
+				ghost->targetVertex = aStarSearch(ghost->currentVertex, pacman->currentVertex);
 			}
 			ghost->move();
 		}
+		return true;
 	}
-
-	return true;
 }
 
 std::vector<Ghost*> Graph::getGhosts()
@@ -123,4 +129,63 @@ Pacman * Graph::getPacman()
 Vertex * Graph::aStarSearch(Vertex * start, Vertex * goal)
 {
 	return nullptr;
+}
+
+Vertex * Graph::aStarClosestPill(Vertex * start)
+{
+	//std::priority_queue<Vertex *, double> frontier;
+	//frontier.emplace(start, 0);
+
+	//std::unordered_map<Vertex *, Vertex *> came_from;
+	//std::unordered_map<Vertex *, double> cost_so_far;
+
+	//came_from[start] = start;
+	//cost_so_far[start] = 0;
+
+	//while (!frontier.empty()) {
+	//	auto current = frontier.top();
+	//	frontier.pop();
+
+	//	for each (auto p in getPills())
+	//	{
+	//		if (current->x == p->x && current->y == p->y) {
+	//			break;
+	//		}
+	//	}
+
+	//	for (auto next : getNeighbours(current)) {
+	//		double new_cost = cost_so_far[current] + getCost(current, next);
+	//		if (!cost_so_far.count(next) || new_cost < cost_so_far[next]) {
+	//			cost_so_far[next] = new_cost;
+
+	//			//double priority = new_cost + heuristic(next, goal); // <----
+
+	//			//frontier.emplace(next, priority);
+	//			came_from[next] = current;
+	//		}
+	//	}
+	//}
+
+	return nullptr;
+}
+
+double Graph::heuristic(Vertex * a, Vertex * b)
+{
+	return abs(a->x - b->x) + abs(a->y - b->y);
+}
+
+double Graph::getCost(Vertex * a, Vertex * b)
+{
+	for each (auto e in edges)
+	{
+		if (e->vertexA == a && e->vertexB == b) {
+			return e->pixelDistance;
+		}
+		else if (e->vertexA == b && e->vertexB == a) {
+			return e->pixelDistance;
+		}
+		else {
+			return 0;
+		}
+	}
 }

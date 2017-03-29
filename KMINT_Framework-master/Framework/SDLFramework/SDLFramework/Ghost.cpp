@@ -44,6 +44,9 @@ Ghost::Ghost(Vertex * v, double wanderChance, double searchPillChance, double ch
 	std::uniform_int_distribution<int> uni(2, 10);
 
 	wanderingTime = uni(rng);
+
+	// put them in a random state
+	ghostState->currentState = ghostState->updateState(wandering, searchPill, chase);
 }
 
 Ghost::~Ghost()
@@ -58,6 +61,7 @@ Ghost::~Ghost()
 
 void Ghost::move()
 {
+	if (targetVertex == NULL) { return; }
 	// x - movement
 	if (x < targetVertex->x) {
 		if (x + speed > targetVertex->x) {
@@ -96,8 +100,8 @@ void Ghost::move()
 
 	// target reached
 	if (x == targetVertex->x && y == targetVertex->y) {
-		currentVertex == targetVertex;
-		targetVertex == NULL;
+		currentVertex = targetVertex;
+		targetVertex = NULL;
 	}
 }
 
@@ -109,15 +113,20 @@ void Ghost::increaseSpeed()
 void Ghost::Update(float deltaTime)
 {
 	SetOffset(x, y, 0);
-	ghostState->updateState(wandering, searchPill, chase);
+	if (targetVertex == NULL) {
+		ghostState->currentState = ghostState->updateState(wandering, searchPill, chase);
 
-	// verander ghosts van kleur
-	/*if (ghostState->currentState == "wandering" && GetTexture() != ghostTextureIdle) {
-		SetTexture(ghostTextureIdle);
-		SetSize(35, 35);
-	} else 	if (ghostState->currentState == "grabPill") {
-		SetTexture(ghostTexturePill);
-		SetSize(35, 35);
-	}*/
+		// verander ghosts van kleur
+		if (ghostState->currentState == "wandering") {
+			SetTexture(ghostTextureIdle);
+		}
+		else if (ghostState->currentState == "grabPill") {
+			SetTexture(ghostTexturePill);
+		}
+		else if (ghostState->currentState == "chasePacman") {
+			SetTexture(ghostTextureChase);
+		}
+	}
+
 }
 

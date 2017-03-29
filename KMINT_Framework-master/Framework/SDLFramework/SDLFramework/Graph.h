@@ -1,5 +1,8 @@
 #pragma once
 #include <vector>
+#include <queue>
+#include <unordered_map>
+
 #include "Edge.h"
 #include "Vertex.h"
 #include "Powerpill.h"
@@ -38,6 +41,13 @@ private:
 
 	FWApplication * app;
 
+	// used for pacman
 	Vertex * aStarSearch(Vertex * start, Vertex * goal);
+	// used for finding pills and moving towards the closest one.
+	Vertex * aStarClosestPill(Vertex * start);
+	// used for star algoritms
+	double heuristic(Vertex * a, Vertex * b);
+	// used for edge weight
+	double getCost(Vertex * a, Vertex * b);
 };
 
