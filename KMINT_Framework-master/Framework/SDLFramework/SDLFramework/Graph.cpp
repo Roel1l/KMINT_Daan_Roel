@@ -76,10 +76,10 @@ bool Graph::run()
 			else if (ghost->ghostState->currentState == "chasePacman") {
 				ghost->targetVertex = aStarSearch(ghost->currentVertex, pacman->currentVertex);
 			}
-			ghost->move();
 		}
-		return true;
+		ghost->move();
 	}
+	return true;
 }
 
 std::vector<Ghost*> Graph::getGhosts()
