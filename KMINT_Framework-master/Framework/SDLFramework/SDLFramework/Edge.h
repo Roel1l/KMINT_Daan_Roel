@@ -12,5 +12,9 @@ public:
 	double bX;
 	double aY;
 	double bY;
+	Vertex * vertexA;
+	Vertex * vertexB;
+
+	double pixelDistance;
 };
 

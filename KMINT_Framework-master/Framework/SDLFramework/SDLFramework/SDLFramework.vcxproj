@@ -94,6 +94,7 @@
     <ClCompile Include="ExampleGameObject.cpp" />
     <ClCompile Include="Pacman.cpp" />
     <ClCompile Include="Powerpill.cpp" />
+    <ClCompile Include="State.cpp" />
     <ClCompile Include="Vector.cpp" />
     <ClCompile Include="Vertex.cpp" />
   </ItemGroup>
@@ -113,6 +114,7 @@
     <ClInclude Include="IGameObject.h" />
     <ClInclude Include="Pacman.h" />
     <ClInclude Include="Powerpill.h" />
+    <ClInclude Include="State.h" />
     <ClInclude Include="Vector.h" />
     <ClInclude Include="Vertex.h" />
   </ItemGroup>

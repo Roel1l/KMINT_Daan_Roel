@@ -6,14 +6,14 @@ class Powerpill : public IGameObject
 {
 public:
 	Powerpill();
-	Powerpill(double x, double y);
+	Powerpill(double xPos, double yPos);
 	~Powerpill();
 
-	SDL_Texture *pillTexture;
-
-	double xPos;
-	double yPos;
+	double x;
+	double y;
 
 	void Update(float deltaTime);
+private:
+	SDL_Texture *pillTexture;
 };
 

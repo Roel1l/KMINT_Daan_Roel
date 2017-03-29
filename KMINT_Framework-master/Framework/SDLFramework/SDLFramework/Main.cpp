@@ -172,23 +172,35 @@ int main(int args[])
 	graph.addVertex(vertex246);
 	graph.addPill(new Powerpill(vertex246->x, vertex246->y));
 
-	// spawn 1e 4 spookjes
+	// spawn spookjes
+	double wanderChance = 33.3;
+	double pillChance = 33.3;
+	double chaseChance = 33.3;
 	auto vertex103 = new Vertex(34, 48);
 	graph.addVertex(vertex103);
-	graph.addGhost(new Ghost(vertex103->x, vertex103->y));
+	for (int x = 0; x < 25; x++) {
+		graph.addGhost(new Ghost(vertex103, wanderChance, pillChance, chaseChance));
+	}
 	auto vertex114 = new Vertex(541, 45);
 	graph.addVertex(vertex114);
-	graph.addGhost(new Ghost(vertex114->x, vertex114->y));
+	for (int x = 0; x < 25; x++) {
+		graph.addGhost(new Ghost(vertex114, wanderChance, pillChance, chaseChance));
+	}
 	auto vertex157 = new Vertex(37, 562);
 	graph.addVertex(vertex157);
-	graph.addGhost(new Ghost(vertex157->x, vertex157->y));
+	for (int x = 0; x < 25; x++) {
+		graph.addGhost(new Ghost(vertex157, wanderChance, pillChance, chaseChance));
+	}
 	auto vertex162 = new Vertex(541, 568);
 	graph.addVertex(vertex162);
-	graph.addGhost(new Ghost(vertex162->x, vertex162->y));
+	for (int x = 0; x < 25; x++) {
+		graph.addGhost(new Ghost(vertex162, wanderChance, pillChance, chaseChance));
+	}
 
 	// Spawn pacman
 	auto vertex250 = new Vertex(290, 345);
 	graph.addVertex(vertex250);
+	graph.addPacman(new Pacman(vertex250->x, vertex250->y));
 
 	graph.addEdge(new Edge(vertex103, vertex106));
 	graph.addEdge(new Edge(vertex106, vertex107));
@@ -278,9 +290,16 @@ int main(int args[])
 	graph.addEdge(new Edge(vertex245, vertex137));
 #pragma endregion
 
+	application->AddRenderable(graph.getPacman());
+
 	for each (auto g in graph.getGhosts())
 	{
 		application->AddRenderable(g);
+	}
+
+	for each (auto p in graph.getPills())
+	{
+		application->AddRenderable(p);
 	}
 
 	while (application->IsRunning())
@@ -296,7 +315,7 @@ int main(int args[])
 				break;
 			case SDL_KEYDOWN:
 				switch (event.key.keysym.sym) {
-					
+
 				default:
 					break;
 				}
@@ -306,7 +325,7 @@ int main(int args[])
 					int mouseX = 0;
 					int mouseY = 0;
 					SDL_GetMouseState(&mouseX, &mouseY);
-	
+
 					Bird* bird = new Bird(lastId + 1, birds, mouseX, mouseY);
 					birds->push_back(bird);
 					application->AddRenderable(bird);
@@ -315,7 +334,9 @@ int main(int args[])
 				break;
 			}
 		}
-
+		if (graph.run()) {
+		
+		}
 		//// For the background
 		application->SetColor(Color(255, 255, 255, 255));
 
